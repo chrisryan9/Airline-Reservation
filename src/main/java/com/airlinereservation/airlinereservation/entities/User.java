@@ -3,6 +3,8 @@ package com.airlinereservation.airlinereservation.entities;
 import com.airlinereservation.airlinereservation.dtos.UserDto;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Users")
 public class User {
@@ -25,6 +27,9 @@ public class User {
 
     @Column(name = "phone_number")
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 
     public User() {
     }
@@ -84,6 +89,10 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public User toEntity() {
+        return null;
     }
 }
 

@@ -2,7 +2,6 @@ package com.airlinereservation.airlinereservation.services;
 
 import com.airlinereservation.airlinereservation.dtos.UserDto;
 import com.airlinereservation.airlinereservation.entities.User;
-import jakarta.transaction.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,5 +13,5 @@ public interface UserService {
     List<String> loginUser(UserDto userDto);
     void deleteUser(Integer id); // Add deleteUser method signature
 
-    Optional<Object> findByEmail(String email);
+    Optional<User> findUserByEmail(String email);
 }

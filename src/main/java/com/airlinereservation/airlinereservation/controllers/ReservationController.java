@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -25,6 +26,12 @@ public class ReservationController {
         return reservationService.findReservationById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/users/{userId}/reservations")
+    public ResponseEntity<Optional<Reservation>> getReservationsByUserId(@PathVariable Integer userId) {
+        Optional<Reservation> reservations = reservationService.findReservationById(userId);
+        return ResponseEntity.ok(reservations);
     }
 
     @PostMapping

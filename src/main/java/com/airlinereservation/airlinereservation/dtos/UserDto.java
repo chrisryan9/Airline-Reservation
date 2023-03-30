@@ -16,16 +16,16 @@ public class UserDto {
     private String password;
     private String phoneNumber;
 
-    public UserDto(UserDto userDto) {
-        this.userId = userDto.getUserId();
-        this.firstName = userDto.getFirstName();
-        this.lastName = userDto.getLastName();
-        this.email = userDto.getEmail();
-        this.password = userDto.getPassword();
-        this.phoneNumber = userDto.getPhoneNumber();
+    public UserDto(User user) {
+        this.userId = user.getId();
+        this.firstName = user.getFirstName();
+        this.lastName = user.getLastName();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.phoneNumber = user.getPhoneNumber();
     }
 
-    public UserDto(User user) {
+    public UserDto(UserDto userDto) {
     }
 
     public User toEntity() {

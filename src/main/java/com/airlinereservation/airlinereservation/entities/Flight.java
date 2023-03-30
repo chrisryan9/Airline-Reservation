@@ -36,6 +36,10 @@ public class Flight {
         return flight_id;
     }
 
+    public int getId() {
+        return flight_id;
+    }
+
     public void setFlight_id(int flight_id) {
         this.flight_id = flight_id;
     }

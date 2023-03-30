@@ -4,6 +4,7 @@ import com.airlinereservation.airlinereservation.dtos.UserDto;
 import com.airlinereservation.airlinereservation.entities.User;
 import com.airlinereservation.airlinereservation.exceptions.EmailAlreadyExistsException;
 import com.airlinereservation.airlinereservation.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -40,22 +42,32 @@ public class UserController {
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public ResponseEntity<String> registerUser(@ModelAttribute UserDto userDto, HttpServletResponse response) throws IOException {
+    public ResponseEntity<String> registerUser(@ModelAttribute UserDto userDto) {
         try {
             userService.registerUser(userDto);
-            response.sendRedirect("/login.html"); // Redirect to login page
-            return null; // Return null since the response has already been sent
+            return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body("{\"message\": \"User registered successfully!\"}");
         } catch (EmailAlreadyExistsException e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> loginUser(@RequestParam String email, @RequestParam String password, HttpServletResponse response) throws IOException {
-        // The actual authentication logic should be handled by a security filter (e.g., Spring Security)
-        // In this case, we assume that the login is successful
-        response.sendRedirect("/user-home.html"); // Redirect to user home page
-        return null; // Return null since the response has already been sent
+    @PostMapping(value = "/login", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public ResponseEntity<UserDto> loginUser(@RequestParam String email, @RequestParam String password) {
+        Optional<User> userOptional = userService.findUserByEmail(email);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+
+            if (passwordEncoder.matches(password, user.getPassword())) {
+                // Return user data as JSON
+                UserDto userDto = new UserDto(user);
+                return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(userDto);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            }
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PutMapping("/{id}")
