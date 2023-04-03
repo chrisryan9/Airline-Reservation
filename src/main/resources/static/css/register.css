@@ -1,0 +1,50 @@
+/* Import styles from home.css */
+@import './home.css';
+
+/* Style the form */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style the form labels */
+label {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Style the form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style the form submit button */
+input[type="submit"] {
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056B3;
+}

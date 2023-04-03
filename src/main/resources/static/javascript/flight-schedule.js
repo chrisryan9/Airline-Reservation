@@ -1,4 +1,11 @@
 // DOM Elements
+const searchForm = document.querySelector("form"); // Add this line to get the form element
+
+// Add the event listener for the form
+searchForm.addEventListener("submit", (event) => {
+    event.preventDefault(); // Prevent the form from submitting and causing a page reload
+});
+
              const flightContainer = document.getElementById("flight-container");
              const originAirportInput = document.getElementById("originAirport");
              const destinationAirportInput = document.getElementById("destinationAirport");

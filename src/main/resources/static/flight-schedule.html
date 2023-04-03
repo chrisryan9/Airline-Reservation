@@ -2,27 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/flight-schedule.css" type="text/css">
     <title>Schedule A Flight!</title>
 </head>
 <body>
+<div class="container">
+    <nav>
+        <a href="user-home.html">Home</a> |
+        <a href="home.html">Logout</a>
+    </nav>
 
-<nav>
-    <a href="user-home.html">Home</a> |
-</nav>
+    <form>
+        <div>
+            <label for="originAirport">Origin Airport:</label>
+            <select id="originAirport"></select>
+        </div>
 
-<div>
-    <label for="originAirport">Origin Airport:</label>
-    <select id="originAirport"></select>
+        <div>
+            <label for="destinationAirport">Destination Airport:</label>
+            <select id="destinationAirport"></select>
+        </div>
+
+        <button id="searchBtn">Search Flights</button>
+    </form>
+
+    <div id="flight-container"></div>
 </div>
-
-<div>
-    <label for="destinationAirport">Destination Airport:</label>
-    <select id="destinationAirport"></select>
-</div>
-
-<button id="searchBtn">Search Flights</button>
-
-<div id="flight-container"></div>
 
 <script src="./javascript/flight-schedule.js"></script>
 </body>

@@ -43,13 +43,40 @@ function displayReservation(reservation) {
     const reservationElement = document.createElement('div');
     reservationElement.classList.add('reservation');
 
-reservationElement.innerHTML = `
-        <p><strong>Passenger Name:</strong> ${reservation.passenger.firstName} ${reservation.passenger.lastName}</p>
-        <p><strong>Flight Details:</strong> ${reservation.flight.originAirport.airport_city} (${reservation.flight.originAirport.airport_code}) to ${reservation.flight.destinationAirport.airport_city} (${reservation.flight.destinationAirport.airport_code})</p>
-        <p><strong>Price:</strong> ${reservation.price}</p>
+    reservationElement.innerHTML = `
+        <p class="reservation-detail"><strong>Passenger Name:</strong> ${reservation.passenger.firstName} ${reservation.passenger.lastName}</p>
+        <p class="reservation-detail"><strong>Flight Details:</strong> ${reservation.flight.originAirport.airport_city} (${reservation.flight.originAirport.airport_code}) to ${reservation.flight.destinationAirport.airport_city} (${reservation.flight.destinationAirport.airport_code})</p>
+        <p class="reservation-detail"><strong>Price:</strong> ${reservation.price}</p>
+        <button class="delete-btn">Delete</button>
     `;
 
     container.appendChild(reservationElement);
+
+    // Add event listener for the delete button
+    const deleteBtn = reservationElement.querySelector(".delete-btn");
+    deleteBtn.addEventListener("click", () => {
+      deleteReservation(reservation.reservation_id);
+    });
+  }
+}
+
+// Function to delete a reservation
+async function deleteReservation(reservationId) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/reservations/${reservationId}`, {
+      method: "DELETE",
+    });
+
+    if (!response.ok) {
+      console.error("Error deleting reservation (status: " + response.status + ", " + response.statusText + ")");
+      throw new Error("Error deleting reservation");
+    }
+
+    alert("Reservation successfully deleted!");
+    container.innerHTML = '<p>You currently do not have any reservations made.</p>';
+  } catch (error) {
+    console.error("Error deleting reservation:", error);
+    alert("Failed to delete reservation. Please try again later.");
   }
 }
 

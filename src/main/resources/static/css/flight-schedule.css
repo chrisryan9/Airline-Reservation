@@ -1,0 +1,43 @@
+/* Import styles from user-home.css */
+@import './user-home.css';
+
+/* Style the form elements */
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+form div {
+    margin-right: 10px;
+}
+
+button {
+    font-size: 18px;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056B3;
+}
+
+/* Style the flight cards */
+#flight-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.card {
+    margin: 10px;
+}
+
+.card-body {
+    text-align: center;
+}

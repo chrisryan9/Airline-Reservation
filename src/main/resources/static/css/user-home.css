@@ -1,0 +1,30 @@
+/* Import styles from home.css */
+@import './home.css';
+
+/* Add a different background color */
+body {
+    background-color: #f0f8ff;
+}
+
+/* Style the user navigation */
+nav {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+nav a {
+    font-size: 18px;
+    color: #007BFF;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin: 0 5px;
+}
+
+nav a:hover {
+    color: #0056B3;
+    text-decoration: none;
+    background-color: #e0e0e0;
+}
